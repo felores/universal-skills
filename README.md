@@ -8,7 +8,7 @@ Instead of bloating your agent's context with all possible knowledge upfront, sk
 
 **Example use case:** A project-specific git skill that knows your team's branch naming conventions, commit message format, and how to create pull requests using GitHub CLI—all loaded only when you're working with git.
 
-## Why I built this
+### Why I built this
 
 A week ago, I reverse engineered Claude Code's skills. A day ago, I spotted this repo [openskills](https://github.com/numman-ali/openskills) which implemented the same functionality for other coding agents. Their approach works but has some shortcomings. That's why I decided to build a functional equivalent to Claude Code's skills based on MCP. More information in the [FAQ documentation](./docs/FAQ.md).
 
