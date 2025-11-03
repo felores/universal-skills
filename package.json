@@ -1,11 +1,11 @@
 {
   "name": "universal-skills",
-  "version": "2.0.1",
-  "description": "MCP server that discovers and loads skill markdown files from prioritized directories",
+  "version": "3.0.0",
+  "description": "MCP server and CLI tool for discovering and installing skills from GitHub repositories",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "skills-mcp-server": "./dist/index.js"
+    "universal-skills": "./dist/cli.js"
   },
   "files": [
     "dist",
@@ -43,7 +43,12 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
     "zod": "^3.23.8",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "commander": "^12.0.0",
+    "simple-git": "^3.25.0",
+    "@inquirer/prompts": "^7.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.0"
   },
   "devDependencies": {
     "typescript": "^5.7.2",
