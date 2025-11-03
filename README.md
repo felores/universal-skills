@@ -47,6 +47,10 @@ Add the skills server to your OpenCode configuration by creating or editing the 
 }
 ```
 
+### Other Agents
+
+This should also work fine with Cursor and other Agent's that support MCP. Just not tested yet.
+
 ## Skill Directory Structure
 
 Skills are automatically discovered from four directories in priority order (first match wins):
