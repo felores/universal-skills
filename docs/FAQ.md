@@ -23,6 +23,16 @@ New skills still require you to restart your agent.
 
 </details>
 
-## How do skills work under the hood?
+## Technical Details
 
-TBD
+<details>
+<summary>How do Claude Code skills work under the hood?</summary>
+Check my [tweet](https://x.com/klaudworks/status/1982029102925414477).
+</details>
+
+<details>
+<summary>Is this really functionally equivalent to Claude Code's skills?</summary>
+
+Yes, I intercepted the traffic from Claude Code to Anthropic's API to verify that. #TODO explain in more detail
+
+</details>
