@@ -1,0 +1,56 @@
+{
+  "name": "universal-skills",
+  "version": "2.0.0",
+  "description": "MCP server that discovers and loads skill markdown files from prioritized directories",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "skills-mcp-server": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klaudworks/universal-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/klaudworks/universal-skills/issues"
+  },
+  "homepage": "https://github.com/klaudworks/universal-skills#readme",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "skills",
+    "ai",
+    "assistant"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "zod": "^3.23.8",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0"
+  }
+}
