@@ -26,7 +26,7 @@ New skills still require you to restart your agent.
 ## Technical Details
 
 <details>
-<summary>How do Claude Code skills work under the hood?</summary>
+<summary>How do Claude's skills work under the hood?</summary>
 Check my tweet: https://x.com/klaudworks/status/1982029102925414477.
 </details>
 
