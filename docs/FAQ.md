@@ -26,6 +26,18 @@ New skills still require you to restart your agent.
 ## Technical Details
 
 <details>
+<summary>How does this differ from other approaches such as openskills?</summary>
+
+- **Requires manual sync**: Users must run `openskills sync` CLI command every time they add a skill to get it discovered
+- **Relies on AGENTS.md**: Uses AGENTS.md for discovery rather than treating skills as native tools
+- **Knowledge decay**: openskills simply injects all available skills into the system prompt. Anthropic injects available tools into each API request instead of into the AGENTS.md. The advantage is that the knowledge about your skills does not decay throughout the conversation.
+
+When using universal-skills with Claude Code, it leads to the same API requests and responses to the Anthropic API as the native skill tool. A skill tool is injected into each API request, so the knowledge about available skills does not decay over time.
+
+Also check out my discussion with the maintainer of openskills: https://github.com/sst/opencode/issues/3235#issuecomment-3487297151
+</details>
+
+<details>
 <summary>How do Claude's skills work under the hood?</summary>
 Check my tweet: https://x.com/klaudworks/status/1982029102925414477.
 </details>
@@ -37,13 +49,4 @@ Yes, I intercepted the traffic from Claude Code to Anthropic's API to verify tha
 
 </details>
 
-<details>
-<summary>Why don't I just use openskills?</summary>
 
-- **Requires manual sync**: Users must run `openskills sync` CLI command every time they add a skill to get it discovered
-- **Relies on AGENTS.md**: Uses AGENTS.md for discovery rather than treating skills as native tools
-- **Knowledge decay**: openskills simply injects all available skills into the system prompt. Anthropic injects available tools into each API request instead of into the AGENTS.md. The advantage is that the knowledge about your skills does not decay throughout the conversation.
-
-When using universal-skills with Claude Code, it leads to the same API requests and responses to the Anthropic API as the native skill tool. A skill tool is injected into each API request, so the knowledge about available skills does not decay over time.
-
-</details>
