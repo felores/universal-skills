@@ -12,7 +12,7 @@ For a real-world example, see [Creating a Skill](./docs/creating-a-skill.md).
 
 ### Why I built this
 
-A week ago, I reverse engineered Claude Code's skills. A day ago, I spotted this repo [openskills](https://github.com/numman-ali/openskills) which implements skills for other coding agents. Their approach works but just writing available skills into the AGENTS.md is suboptimal. That's why I decided to build a functional equivalent to Claude Code's skills based on MCP. More information in the [FAQ documentation](./docs/FAQ.md).
+A week ago, I reverse engineered Claude Code's skills. A day ago, I spotted this repo [openskills](https://github.com/numman-ali/openskills) which implements skills for other coding agents. Their approach works but is suboptimal. That's why I decided to build a functional equivalent to Claude Code's skills based on MCP. See [why not use openskills](./docs/FAQ.md#why-dont-i-just-use-openskills) for details.
 
 ## Installation
 
