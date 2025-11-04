@@ -3,6 +3,7 @@
 ## Installation and Setup
 
 <details>
+  
 <summary>What AI agents are supported?</summary>
 
 Universal Skills MCP Server works with any MCP-compatible AI agent, including:
@@ -15,6 +16,7 @@ Universal Skills MCP Server works with any MCP-compatible AI agent, including:
 </details>
 
 <details>
+  
 <summary>Do I need to restart my agent after making changes to a skill?</summary>
 
 Unlike in Claude Code's implementation, modified skills will be picked up within 30 seconds. This allows you to modify a skill while you are working with it. Then you can just instruct your agent to load the skill again and the updated skill will be loaded.
@@ -26,6 +28,7 @@ New skills still require you to restart your agent.
 ## Technical Details
 
 <details>
+  
 <summary>How does this differ from other approaches such as openskills?</summary>
 
 - **Requires manual sync**: Users must run `openskills sync` CLI command every time they add a skill to get it discovered
@@ -38,11 +41,13 @@ Also check out my discussion with the maintainer of openskills: https://github.c
 </details>
 
 <details>
+  
 <summary>How do Claude's skills work under the hood?</summary>
 Check my tweet: https://x.com/klaudworks/status/1982029102925414477.
 </details>
 
 <details>
+  
 <summary>Is this really functionally equivalent to Claude Code's skills?</summary>
 
 Yes, I intercepted the traffic from Claude Code to Anthropic's API to verify that. #TODO explain in more detail
