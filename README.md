@@ -8,7 +8,7 @@
 
 ### How to Use Skills
 
-For a real-world example, see [Creating a Skill](./docs/creating-a-skill.md).
+For a real-world example on how I personally use skills see [Creating a Skill](./docs/creating-a-skill.md).
 
 ### Why I built this
 
