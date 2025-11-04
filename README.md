@@ -24,6 +24,8 @@ Add the skills server to Codex using the MCP add command:
 codex mcp add universal-skills -- npx universal-skills mcp
 ```
 
+<img width="660" height="573" alt="image" src="https://github.com/user-attachments/assets/8f0fb13b-1cbd-4552-917c-1b1c36d8180c" />
+
 ### Claude Code
 
 Add the skills server to Claude Code using the MCP add command:
@@ -31,6 +33,9 @@ Add the skills server to Claude Code using the MCP add command:
 ```bash
 claude mcp add --transport stdio universal-skills -- npx universal-skills mcp
 ```
+
+<img width="1298" height="462" alt="image" src="https://github.com/user-attachments/assets/1ffc36e0-0522-48fa-ab5c-871e0e206054" />
+
 
 ### OpenCode
 
@@ -48,6 +53,11 @@ Add the skills server to your OpenCode configuration by creating or editing the 
   }
 }
 ```
+
+For opencode I had to be quite explicit in instructing the agent to load a skill. I will have a look into their default instructions to improve that.
+
+<img width="844" height="446" alt="image" src="https://github.com/user-attachments/assets/0b61967a-122e-4289-a0b1-a078f54c55cc" />
+
 
 ### Other Agents
 
