@@ -5,7 +5,7 @@ High-level:
 1. Work on a problem.
 2. Recognize grunt work.
 3. Load the Skill Creator meta-skill to create a new skill.
-4. Write a skill to semi-automate it.
+4. Write a skill to (semi-)automate your problem.
 5. Profit.
 
 Example: Publishing an npm package
