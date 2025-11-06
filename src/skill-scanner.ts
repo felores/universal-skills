@@ -78,7 +78,67 @@ export class SkillCache {
 }
 
 /**
- * Scans a single skill directory for SKILL.md files
+ * Recursively scans a directory tree for SKILL.md files at any depth
+ * @param directoryPath - Absolute path to scan
+ * @param source - Source directory type
+ * @param location - Project or global location
+ * @returns Array of discovered skills
+ */
+export async function scanSkillDirectoryRecursive(
+  directoryPath: string,
+  source: SkillSource,
+  location: SkillLocation
+): Promise<Skill[]> {
+  const skills: Skill[] = [];
+
+  async function scanRecursively(currentPath: string): Promise<void> {
+    try {
+      // Check if directory exists
+      await fs.access(currentPath);
+
+      // Read directory contents
+      const entries = await fs.readdir(currentPath, { withFileTypes: true });
+
+      // Check if current directory contains SKILL.md
+      const hasSkillFile = entries.some(
+        (entry) => entry.isFile() && entry.name === SKILL_FILENAME
+      );
+
+      if (hasSkillFile) {
+        const skillFilePath = path.join(currentPath, SKILL_FILENAME);
+        const skill = await loadSkillFile(skillFilePath, currentPath, source, location);
+        if (skill) {
+          skills.push(skill);
+          console.error(`  Found skill: ${skill.name} (${source})`);
+        }
+      }
+
+      // Recursively scan subdirectories
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          const subdirPath = path.join(currentPath, entry.name);
+          await scanRecursively(subdirPath);
+        }
+      }
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+        // Directory doesn't exist - skip silently
+        return;
+      }
+      if ((error as NodeJS.ErrnoException).code === "EACCES") {
+        // Permission denied - skip silently
+        return;
+      }
+      console.error(`Error scanning directory ${currentPath}:`, error);
+    }
+  }
+
+  await scanRecursively(directoryPath);
+  return skills;
+}
+
+/**
+ * Scans a single skill directory for SKILL.md files (non-recursive, one level deep)
  * @param directoryPath - Absolute path to scan
  * @param source - Source directory type
  * @param location - Project or global location
@@ -126,9 +186,10 @@ export async function scanSkillDirectory(
 /**
  * Scans all skill directories in priority order
  * @param cache - SkillCache to populate
+ * @param useRecursiveScan - Whether to use recursive scanning for custom directories
  * @returns Number of skills discovered
  */
-export async function scanAllDirectories(cache: SkillCache): Promise<number> {
+export async function scanAllDirectories(cache: SkillCache, useRecursiveScan: boolean = false): Promise<number> {
   // Clear existing cache
   cache.clear();
 
@@ -140,7 +201,11 @@ export async function scanAllDirectories(cache: SkillCache): Promise<number> {
     const absolutePath = path.resolve(resolvedPath);
 
     console.error(`Scanning ${dirPath} (${absolutePath})...`);
-    const skills = await scanSkillDirectory(absolutePath, source, location);
+    
+    // Use recursive scan for custom directories, regular scan for default directories
+    const skills = (source === SkillSource.CUSTOM && useRecursiveScan)
+      ? await scanSkillDirectoryRecursive(absolutePath, source, location)
+      : await scanSkillDirectory(absolutePath, source, location);
 
     // Add skills to cache (priority: first match wins)
     for (const skill of skills) {

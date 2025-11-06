@@ -10,6 +10,7 @@ export enum SkillSource {
   GLOBAL_UNIVERSAL = "~/.agent/skills",
   PROJECT_CLAUDE = "./.claude/skills",
   GLOBAL_CLAUDE = "~/.claude/skills",
+  CUSTOM = "custom",
 }
 
 /**

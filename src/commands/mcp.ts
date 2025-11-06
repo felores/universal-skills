@@ -2,8 +2,16 @@
  * MCP command - starts the MCP server
  */
 
-export async function mcpCommand() {
-  // Import and run the MCP server
-  // The index.ts file will automatically start the server when imported
-  await import("../index.js");
+import { startServer } from "../index.js";
+
+interface McpOptions {
+  skillDir?: string[];
+}
+
+export async function mcpCommand(options: McpOptions) {
+  // Get skill directories from options (already an array thanks to collect function)
+  const additionalDirs: string[] = options.skillDir || [];
+
+  // Start the MCP server with additional directories
+  await startServer(additionalDirs);
 }

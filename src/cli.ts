@@ -23,10 +23,21 @@ program
   .description("MCP server and CLI tool for discovering and installing skills")
   .version(packageJson.version);
 
+// Helper function to collect multiple option values
+function collect(value: string, previous?: string[]): string[] {
+  return (previous || []).concat([value]);
+}
+
 // Register commands
 program
   .command("mcp")
   .description("Start the MCP server")
+  .option(
+    "--skill-dir <path>",
+    "Additional directory to recursively search for skills (can be specified multiple times)\n" +
+    "                           Example: --skill-dir ~/.claude/plugins --skill-dir ~/my-skills",
+    collect
+  )
   .action(mcpCommand);
 
 program

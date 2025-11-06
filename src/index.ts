@@ -15,7 +15,7 @@ import {
 import { SkillCache, scanAllDirectories } from "./skill-scanner.js";
 import { SkillToolInputSchema } from "./schemas.js";
 import { formatSkillNotFoundError } from "./utils.js";
-import { SERVER_NAME, SERVER_VERSION, REFRESH_INTERVAL_MS } from "./constants.js";
+import { SERVER_NAME, SERVER_VERSION, REFRESH_INTERVAL_MS, addSkillDirectories } from "./constants.js";
 
 // Global skill cache
 const skillCache = new SkillCache();
@@ -64,12 +64,23 @@ ${skillsList}
 
 /**
  * Main server initialization
+ * @param additionalDirs - Optional array of additional directories to search for skills
  */
-async function main() {
+export async function startServer(additionalDirs: string[] = []) {
   console.error(`${SERVER_NAME} v${SERVER_VERSION} starting...`);
 
+  // Process additional skill directories if provided
+  let useRecursiveScan = false;
+  
+  if (additionalDirs.length > 0) {
+    console.error(`Adding ${additionalDirs.length} additional skill director${additionalDirs.length === 1 ? 'y' : 'ies'}...`);
+    additionalDirs.forEach(dir => console.error(`  - ${dir}`));
+    addSkillDirectories(additionalDirs);
+    useRecursiveScan = true;
+  }
+
   // Initial skill scan
-  await scanAllDirectories(skillCache);
+  await scanAllDirectories(skillCache, useRecursiveScan);
   console.error(`Skills MCP server running via stdio`);
 
   // Create MCP server
@@ -161,7 +172,7 @@ ${skill.content}`;
   setInterval(async () => {
     try {
       console.error("Refreshing skills...");
-      await scanAllDirectories(skillCache);
+      await scanAllDirectories(skillCache, useRecursiveScan);
       console.error("Skills refreshed successfully");
     } catch (error) {
       console.error("Error refreshing skills:", error);
@@ -174,9 +185,3 @@ ${skill.content}`;
 
   console.error("Server connected and ready");
 }
-
-// Run the server
-main().catch((error) => {
-  console.error("Fatal error:", error);
-  process.exit(1);
-});

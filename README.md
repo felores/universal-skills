@@ -94,6 +94,14 @@ Each skill is a directory containing a `SKILL.md` file:
 
 **Priority Resolution**: If the same skill name exists in multiple directories, the one from the higher priority directory wins. This allows you to override global skills with project-specific versions.
 
+### Custom Skill Directories
+
+Add additional directories to recursively search for skills using `--skill-dir` (can be specified multiple times):
+
+```bash
+codex mcp add skills -- npx universal-skills mcp --skill-dir ~/.claude/plugins
+```
+
 ## Download and install specific skills
 
 Install a skill from a GitHub repository:
