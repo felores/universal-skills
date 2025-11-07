@@ -148,3 +148,6 @@ opencode.jsonc
 !.agent/skills/npm-publisher/
 AGENTS.md
 CLAUDE.md
+
+# macOS system files
+.DS_Store
