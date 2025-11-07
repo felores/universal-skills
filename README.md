@@ -73,14 +73,74 @@ This should also work fine with Cursor and other Agent's that support MCP. Just 
 
 </details>
 
+## Updating
+
+When using `npx universal-skills mcp`, npx caches the package locally. Once cached, it will continue using that cached version even when newer versions are published to npm. Users will NOT automatically get the newest version.
+
+To update to the latest version of Universal Skills:
+
+### Option 1: Clear npx cache
+
+```bash
+npx clear-npx-cache
+```
+
+Or manually remove the cache:
+
+```bash
+rm -rf ~/.npm/_npx
+```
+
+### Option 2: Reinstall with @latest tag
+
+<details>
+<summary><strong>Codex</strong></summary>
+
+```bash
+codex mcp remove skills
+codex mcp add skills -- npx universal-skills@latest mcp
+```
+
+</details>
+
+<details>
+<summary><strong>Claude Code</strong></summary>
+
+```bash
+claude mcp remove skills
+claude mcp add --transport stdio skills -- npx universal-skills@latest mcp
+```
+
+</details>
+
+<details>
+<summary><strong>OpenCode</strong></summary>
+
+Update your `opencode.json` to use the `@latest` tag:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "skills": {
+      "type": "local",
+      "command": ["npx", "universal-skills@latest", "mcp"],
+      "enabled": true
+    }
+  }
+}
+```
+
+</details>
+
 ## Skill Directory Structure
 
 Skills are automatically discovered from four directories in priority order (first match wins):
 
 1. `yourproject/.agent/skills/` - Project-specific skills
 2. `yourproject/.claude/skills/` - Project-specific skills
-3. `~/.claude/skills/` - Global skills
-4. `~/.agent/skills/` - Global skills
+3. `~/.agent/skills/` - Global skills
+4. `~/.claude/skills/` - Global skills
 
 Each skill is a directory containing a `SKILL.md` file:
 
@@ -92,7 +152,9 @@ Each skill is a directory containing a `SKILL.md` file:
     └── SKILL.md
 ```
 
-**Priority Resolution**: If the same skill name exists in multiple directories, the one from the higher priority directory wins. This allows you to override global skills with project-specific versions.
+**Priority Resolution**: If the same skill name exists in multiple directories, the one from the higher priority directory wins. This allows you to:
+- Override global skills with project-specific versions
+- Override Claude-specific skills with universal agent skills (useful when different agents need different configurations)
 
 ### Custom Skill Directories
 
